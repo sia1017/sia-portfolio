@@ -1,0 +1,1322 @@
+:root {
+  color-scheme: light;
+  --bg: #f4f6f3;
+  --surface: #ffffff;
+  --surface-soft: #f8faf8;
+  --line: #e6ebe5;
+  --line-strong: #d6ddd5;
+  --ink: #1d2923;
+  --muted: #738077;
+  --muted-2: #a1aba3;
+  --green: #277353;
+  --green-soft: #e6f2ea;
+  --red: #b45449;
+  --red-soft: #f9ecea;
+  --amber: #a87528;
+  --amber-soft: #fbf3dd;
+  --blue: #527a96;
+  --shadow: 0 8px 24px rgba(39, 56, 44, 0.045);
+  font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html { min-width: 320px; background: var(--bg); }
+
+body {
+  margin: 0;
+  color: var(--ink);
+  background: var(--bg);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+button, input, select { font: inherit; }
+button { cursor: pointer; }
+
+.app-shell { min-height: 100vh; }
+
+.topbar {
+  height: 68px;
+  padding: 0 32px;
+  border-bottom: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.96);
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.brand-lockup { display: flex; align-items: center; gap: 11px; min-width: 64px; }
+.brand-mark {
+  width: 42px;
+  height: 30px;
+  border-radius: 7px;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  background: var(--green);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0;
+}
+.brand-name { font-weight: 750; letter-spacing: 0.02em; }
+.brand-subtitle { color: var(--muted-2); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; }
+
+.main-nav {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 4px;
+  height: 100%;
+  align-items: center;
+  flex: 1;
+}
+.nav-item {
+  width: 100%;
+  height: 48px;
+  padding: 5px 8px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 750;
+  text-align: left;
+  transition: color 160ms ease, border-color 160ms ease, background 160ms ease;
+}
+.nav-item:hover, .nav-item.is-active { color: var(--ink); }
+.nav-item.is-active {
+  border: 1px solid var(--green);
+  border-radius: 6px;
+  background: var(--green-soft);
+  color: var(--green);
+  font-weight: 700;
+}
+
+.topbar-actions { margin-left: auto; display: flex; align-items: center; gap: 14px; }
+.market-status { display: inline-flex; align-items: center; gap: 7px; color: var(--muted); font-size: 12px; white-space: nowrap; }
+.status-dot, .live-pulse { width: 7px; height: 7px; border-radius: 50%; background: var(--green); display: inline-block; }
+.status-dot { box-shadow: 0 0 0 4px var(--green-soft); }
+.status-dot.is-warning { background: var(--amber); box-shadow: 0 0 0 4px var(--amber-soft); }
+.status-dot.is-error { background: var(--red); box-shadow: 0 0 0 4px var(--red-soft); }
+.icon-button, .avatar-button {
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--muted);
+  display: grid;
+  place-items: center;
+  border-radius: 7px;
+}
+.icon-button { font-size: 20px; line-height: 1; }
+.icon-button:hover { border-color: var(--green); color: var(--green); }
+.avatar-button { border-radius: 50%; background: #e8eee8; border: 0; color: var(--green); font-weight: 700; }
+
+.main-content { max-width: 1440px; margin: 0 auto; padding: 18px 32px 24px; }
+.view-section { display: none; }
+.view-section.is-active { display: block; }
+.status-only-row { justify-content: flex-end; min-height: 34px; margin-bottom: 18px; }
+.hero-row { display: flex; align-items: flex-end; justify-content: space-between; gap: 30px; margin-bottom: 18px; }
+#overviewView > .metric-grid { gap: 10px; margin-bottom: 10px; }
+#overviewView > .metric-grid .metric-card { min-height: 96px; padding: 12px 14px; }
+#overviewView > .metric-grid .metric-value { margin: 7px 0 3px; font-size: 24px; }
+#overviewView > .dashboard-grid { gap: 10px; margin-bottom: 10px; }
+#overviewView .trend-panel, #overviewView .sector-panel { min-height: 276px; padding: 16px 18px 14px; }
+#overviewView .chart-legend { margin-top: 14px; }
+#overviewView .trend-chart-wrap { height: 154px; margin-top: 6px; }
+#overviewView .sector-chart { margin-top: 12px; gap: 10px; }
+#overviewView .sector-footer { margin-top: 16px; padding-top: 10px; }
+.eyebrow, .panel-kicker {
+  margin: 0 0 8px;
+  color: var(--green);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+h1, h2, p { margin-top: 0; }
+h1 { max-width: 760px; margin-bottom: 9px; font-size: clamp(26px, 3vw, 40px); line-height: 1.17; letter-spacing: 0; }
+.hero-copy { max-width: 700px; margin-bottom: 0; color: var(--muted); font-size: 14px; }
+.live-clock {
+  min-width: 168px;
+  padding: 11px 14px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  border-radius: 8px;
+  color: var(--muted);
+  font-size: 11px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 3px 8px;
+  box-shadow: var(--shadow);
+}
+.live-clock-card,
+.crypto-status-card {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-content: center;
+  gap: 2px 8px;
+  color: var(--muted);
+  font-size: 11px;
+}
+.live-clock-card strong,
+.crypto-status-card strong {
+  grid-column: 2;
+  color: var(--ink);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+.live-clock-card small,
+.crypto-status-card small {
+  grid-column: 2;
+  color: var(--muted-2);
+  font-size: 9px;
+  white-space: nowrap;
+}
+.crypto-status-card .status-dot { grid-row: 1 / 3; align-self: center; }
+.live-clock strong { grid-column: 2; color: var(--ink); font-size: 16px; font-weight: 700; letter-spacing: 0.02em; }
+.live-clock small { grid-column: 2; color: var(--muted-2); font-size: 9px; }
+.live-pulse { grid-row: 1 / 3; align-self: center; box-shadow: 0 0 0 4px var(--green-soft); }
+.crypto-hero-row { display: flex; align-items: flex-end; justify-content: space-between; gap: 30px; margin-bottom: 18px; }
+.account-hero-row { margin-bottom: 18px; }
+.dividend-hero-row { margin-bottom: 18px; }
+.account-summary-strip {
+  display: grid;
+  grid-template-columns: 176px minmax(0, 1fr);
+  gap: 8px;
+  align-items: stretch;
+  margin-bottom: 10px;
+}
+#accountView.is-crypto-account .account-summary-strip {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+#accountView.is-crypto-account .account-summary-strip > .account-metric-grid {
+  display: contents;
+}
+.account-type-tabs {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+.main-nav .account-type-tabs {
+  display: contents;
+  width: auto;
+  margin: 0;
+}
+.main-nav .account-type-tab {
+  width: 100%;
+  height: 48px;
+  min-width: 0;
+  padding: 5px 8px;
+}
+.account-type-tab {
+  min-width: 150px;
+  padding: 6px 10px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--muted);
+  text-align: left;
+}
+.account-type-tab span,
+.account-type-tab small { display: block; }
+.account-type-tab span { font-size: 11px; font-weight: 750; }
+.account-type-tab small { margin-top: 1px; color: var(--muted-2); font-size: 9px; }
+.account-type-tab.is-active {
+  border-color: var(--green);
+  background: var(--green-soft);
+  color: var(--green);
+}
+.account-type-tab:nth-child(2) { margin-right: 0; }
+.account-type-tab.is-active small { color: var(--green); }
+.account-sync-card {
+  min-width: 0;
+  min-height: 78px;
+  padding: 9px 11px;
+  align-content: center;
+}
+.account-sync-card strong { font-size: 14px; }
+.account-metric-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  margin-bottom: 0;
+}
+.account-metric-grid .metric-card {
+  min-height: 78px;
+  padding: 10px 12px;
+}
+.account-metric-grid .metric-value {
+  margin: 5px 0 2px;
+  font-size: 21px;
+  white-space: nowrap;
+}
+.account-metric-grid .metric-value small { margin-left: 5px; font-size: 11px; }
+.account-metric-grid .metric-meta { font-size: 9px; }
+.account-extra-metric { display: none; }
+.account-extra-metric.is-visible { display: block; }
+.account-exchange-note { font-size: 10px; line-height: 15px; }
+.account-exchange-note #accountExchangeRate { font-size: 10px; font-weight: 700; }
+.account-exchange-note #accountExchangeMeta { margin-left: 6px; color: var(--muted-2); font-size: 9px; }
+#accountView.is-crypto-account .account-metric-grid { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+#accountView.is-fixed-account #accountDividendMetric { display: none; }
+#accountView.is-fixed-account .account-metric-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.crypto-market-pill {
+  min-width: 190px;
+  padding: 11px 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 2px 8px;
+  color: var(--muted);
+  font-size: 11px;
+}
+.crypto-market-pill .status-dot { grid-row: 1 / 3; align-self: center; }
+.crypto-market-pill strong { grid-column: 2; color: var(--ink); font-size: 16px; letter-spacing: .02em; }
+.crypto-market-pill small { grid-column: 2; color: var(--muted-2); font-size: 9px; }
+
+.metric-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-bottom: 14px; }
+.overview-metric-grid { grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 10px; }
+.crypto-metric-grid { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; }
+.overview-metric-grid .live-clock-card {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-content: center;
+  gap: 2px 8px;
+}
+.overview-metric-grid .live-clock-card .live-pulse { grid-row: auto; }
+.overview-metric-grid .live-clock-card strong,
+.overview-metric-grid .live-clock-card small {
+  grid-column: 2;
+  white-space: nowrap;
+}
+.metric-card {
+  min-height: 128px;
+  padding: 19px 20px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+.metric-card-alert { background: #fffdf8; border-color: #efe4c8; }
+.account-summary-strip > .account-metric-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 0;
+}
+.metric-label { color: var(--muted); font-size: 12px; }
+.metric-value { margin: 12px 0 5px; font-size: 31px; font-weight: 750; letter-spacing: 0; }
+.metric-value small { color: var(--muted); font-size: 14px; font-weight: 500; }
+.metric-meta { font-size: 11px; font-weight: 700; }
+.metric-meta span { margin-left: 4px; color: var(--muted-2); font-weight: 500; }
+.positive { color: var(--green); }
+.neutral { color: var(--blue); }
+.alert { color: var(--amber); }
+.score-chip { display: inline-flex; padding: 1px 5px; border-radius: 4px; background: #edf2f4; color: var(--blue) !important; font-weight: 700 !important; }
+
+.dashboard-grid { display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(300px, 0.9fr); gap: 14px; margin-bottom: 14px; }
+.panel { border: 1px solid var(--line); border-radius: 8px; background: var(--surface); box-shadow: var(--shadow); }
+.trend-panel, .sector-panel { min-height: 336px; padding: 20px 22px 18px; }
+.crypto-metric-grid { margin-bottom: 14px; }
+.analysis-panel { min-height: 336px; padding: 20px 22px 18px; }
+.signal-list { display: grid; gap: 18px; margin-top: 22px; }
+.signal-row { display: grid; grid-template-columns: 88px 1fr 28px; align-items: center; gap: 10px; }
+.signal-row > div:first-child { display: flex; justify-content: space-between; gap: 8px; align-items: baseline; }
+.signal-label { color: var(--muted); font-size: 11px; }
+.signal-row strong { color: var(--ink); font-size: 11px; white-space: nowrap; }
+.signal-track { height: 6px; overflow: hidden; border-radius: 4px; background: #edf2ed; }
+.signal-fill { display: block; height: 100%; border-radius: inherit; transition: width 200ms ease; }
+.signal-fill-green { background: var(--green); }
+.signal-fill-blue { background: var(--blue); }
+.signal-fill-amber { background: var(--amber); }
+.signal-value { color: var(--ink); font-size: 11px; text-align: right; font-variant-numeric: tabular-nums; }
+.analysis-summary { display: flex; gap: 10px; align-items: flex-start; margin-top: 25px; padding: 13px; border: 1px solid #e4eee7; border-radius: 6px; background: var(--surface-soft); }
+.summary-icon { width: 23px; height: 23px; display: grid; place-items: center; border-radius: 50%; color: var(--green); background: var(--green-soft); font-weight: 800; }
+.analysis-summary strong, .analysis-summary span { display: block; }
+.analysis-summary strong { color: var(--ink); font-size: 12px; }
+.analysis-summary span:last-child { margin-top: 3px; color: var(--muted); font-size: 10px; line-height: 1.45; }
+.crypto-table-panel { overflow: hidden; }
+.crypto-table .signal-badge { display: inline-flex; min-width: 42px; justify-content: center; padding: 3px 7px; border-radius: 4px; font-size: 10px; font-weight: 700; }
+.signal-badge.bullish { color: var(--green); background: var(--green-soft); }
+.signal-badge.watch { color: var(--amber); background: var(--amber-soft); }
+.crypto-change-positive { color: var(--green); font-weight: 700; }
+.crypto-change-negative { color: var(--red); font-weight: 700; }
+.crypto-symbol { display: block; margin-top: 2px; color: var(--muted-2); font-size: 10px; }
+.crypto-price { font-weight: 750; }
+.crypto-range { color: var(--muted); font-size: 10px; white-space: nowrap; }
+.account-form-panel { padding: 15px 18px 16px; margin-bottom: 10px; }
+#accountView.is-crypto-account .account-dividend-only { display: none; }
+#accountView.is-crypto-account .account-metric-grid { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+#accountView.is-crypto-account .account-form {
+  grid-template-columns: repeat(4, minmax(0, 1fr)) minmax(150px, 1.2fr);
+}
+#accountView.is-stock-account .account-form {
+  grid-template-columns: repeat(6, minmax(0, 1fr)) minmax(150px, 1.2fr);
+}
+#accountView.is-stock-account .account-current-price-field,
+#accountView.is-crypto-account .account-current-price-field { display: none; }
+#accountView.is-fixed-account .account-dividend-only { display: none; }
+#accountView.is-fixed-account .account-annual-card { display: block; }
+#accountView.is-fixed-account .account-metric-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+#accountView.is-fixed-account .account-form .form-field small {
+  visibility: hidden;
+}
+.account-form { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)) minmax(150px, 1.2fr); gap: 10px; margin-top: 14px; align-items: stretch; }
+.form-field {
+  display: grid;
+  grid-template-rows: 15px 34px 13px;
+  gap: 4px;
+  min-width: 0;
+}
+.form-field > span { color: var(--muted); font-size: 10px; font-weight: 700; }
+.form-field input {
+  width: 100%;
+  height: 34px;
+  padding: 0 9px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  outline: none;
+  background: var(--surface);
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+.form-field input:focus { border-color: var(--green); box-shadow: 0 0 0 3px var(--green-soft); }
+.form-field input[readonly] { color: var(--green); background: var(--surface-soft); font-weight: 700; }
+.form-field small { min-height: 13px; color: var(--muted-2); font-size: 9px; }
+.form-field small.form-hint-success { color: var(--green); }
+.form-field small.form-hint-warning { color: var(--amber); }
+.account-form-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+  align-self: start;
+  margin-top: 0;
+  height: 53px;
+}
+.account-submit-group { display: grid; grid-template-rows: 15px 34px; gap: 4px; min-width: 0; }
+.account-form-kicker { color: var(--muted); font-size: 10px; font-weight: 700; line-height: 15px; }
+.account-note-field input { text-overflow: ellipsis; }
+.primary-button, .secondary-button {
+  height: 32px;
+  padding: 0 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 700;
+}
+.account-form-actions .primary-button,
+.account-form-actions .secondary-button {
+  width: 100%;
+  min-width: 0;
+  height: 34px;
+  padding-left: 6px;
+  padding-right: 6px;
+  white-space: nowrap;
+}
+.account-form-actions > .secondary-button { align-self: end; }
+.primary-button { border: 1px solid var(--green); background: var(--green); color: #fff; }
+.primary-button:hover { background: #1f6045; border-color: #1f6045; }
+.secondary-button { border: 1px solid var(--line); background: var(--surface); color: var(--muted); }
+.secondary-button:hover { border-color: var(--green); color: var(--green); }
+.compact-button { height: 32px; padding: 0 9px; }
+.account-live-label { display: inline-flex; align-items: center; gap: 7px; color: var(--muted); font-size: 11px; }
+.account-live-label .status-dot { width: 6px; height: 6px; box-shadow: 0 0 0 3px var(--green-soft); }
+.account-holdings-panel { overflow: hidden; }
+.account-dividend-calendar { display: none; margin-top: 10px; overflow: hidden; }
+#accountView.is-stock-account .account-dividend-calendar { display: block; }
+.account-table { min-width: 1260px; }
+#accountView.is-stock-account .account-table {
+  min-width: 1080px;
+  table-layout: fixed;
+}
+#accountView.is-stock-account .account-table th,
+#accountView.is-stock-account .account-table td {
+  padding-left: 10px;
+  padding-right: 10px;
+  text-align: center;
+}
+#accountView.is-stock-account .account-table th:first-child,
+#accountView.is-stock-account .account-table td:first-child {
+  width: 14%;
+  text-align: left;
+}
+#accountView.is-stock-account .account-table th:nth-child(2),
+#accountView.is-stock-account .account-table td:nth-child(2) { width: 7%; }
+#accountView.is-stock-account .account-table th:nth-child(3),
+#accountView.is-stock-account .account-table td:nth-child(3) { width: 10%; }
+#accountView.is-stock-account .account-table th:nth-child(4),
+#accountView.is-stock-account .account-table td:nth-child(4) { width: 8%; }
+#accountView.is-stock-account .account-table th:nth-child(5),
+#accountView.is-stock-account .account-table td:nth-child(5) { width: 7%; }
+#accountView.is-stock-account .account-table th:nth-child(6),
+#accountView.is-stock-account .account-table td:nth-child(6) { width: 8%; }
+#accountView.is-stock-account .account-table th:nth-child(7),
+#accountView.is-stock-account .account-table td:nth-child(7) { width: 9%; }
+#accountView.is-stock-account .account-table th:nth-child(8),
+#accountView.is-stock-account .account-table td:nth-child(8) { width: 8%; }
+#accountView.is-stock-account .account-table th:nth-child(9),
+#accountView.is-stock-account .account-table td:nth-child(9) { width: 9%; }
+#accountView.is-stock-account .account-table th:nth-child(10),
+#accountView.is-stock-account .account-table td:nth-child(10) { width: 8%; }
+#accountView.is-stock-account .account-table th:nth-child(11),
+#accountView.is-stock-account .account-table td:nth-child(11) { width: 8%; }
+#accountView.is-stock-account .account-table th:nth-child(12),
+#accountView.is-stock-account .account-table td:nth-child(12) { width: 4%; }
+.account-note-cell { max-width: 180px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.account-summary-row td {
+  background: var(--surface-soft);
+  border-bottom: 1px solid var(--line-strong);
+  color: var(--ink);
+  font-weight: 700;
+}
+.account-summary-row .stock-code { font-weight: 500; }
+.account-summary-number { font-variant-numeric: tabular-nums; }
+.account-table .positive-value { color: var(--green); font-weight: 750; }
+.stock-monitor-table .positive-value { color: var(--green); font-weight: 750; }
+.stock-monitor-metrics[hidden] { display: none !important; }
+.roe-stack { display: inline-flex; flex-direction: column; gap: 3px; line-height: 1.15; white-space: nowrap; }
+.ma-stack { display: inline-flex; flex-direction: column; gap: 3px; line-height: 1.15; white-space: nowrap; }
+.monitor-category { display: block; margin-top: 3px; color: var(--muted); font-size: 10px; line-height: 1.1; }
+.rsi-overbought { color: var(--green); font-weight: 750; }
+.account-table .negative-value { color: var(--red); font-weight: 750; }
+.account-table .dividend-value { color: var(--amber); font-weight: 700; }
+.account-signal-badge {
+  display: inline-flex;
+  min-width: 42px;
+  justify-content: center;
+  padding: 3px 7px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 700;
+}
+.account-signal-badge.bullish { color: var(--red); background: var(--red-soft); }
+.account-signal-badge.watch { color: var(--amber); background: var(--amber-soft); }
+.account-signal-badge.bearish { color: var(--green); background: var(--green-soft); }
+#accountView.is-stock-account .positive,
+#accountView.is-crypto-account .positive { color: var(--red); }
+#accountView.is-stock-account .alert,
+#accountView.is-crypto-account .alert { color: var(--green); }
+#accountView.is-stock-account .account-table .positive-value,
+#accountView.is-crypto-account .account-table .positive-value { color: var(--red); }
+#accountView.is-stock-account .account-table .negative-value,
+#accountView.is-crypto-account .account-table .negative-value { color: var(--green); }
+.account-table .account-action-button {
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  background: var(--surface);
+  color: var(--muted-2);
+  font-size: 17px;
+  line-height: 1;
+}
+.account-action-buttons { display: flex; gap: 6px; }
+.account-table .account-action-button.edit { font-size: 14px; }
+.account-table .account-action-button.edit:hover { border-color: var(--green); color: var(--green); }
+.account-table .account-action-button.remove:hover { border-color: var(--red); color: var(--red); }
+.account-empty-state { padding: 48px 20px !important; text-align: center !important; }
+.account-empty-state strong, .account-empty-state span { display: block; }
+.account-empty-state strong { color: var(--ink); font-size: 13px; }
+.account-empty-state span { margin-top: 5px; color: var(--muted-2); font-size: 11px; }
+.dividend-panel { overflow: hidden; }
+.dividend-heading { padding: 22px 22px 18px; align-items: center; }
+.dividend-heading .dividend-clock {
+  min-width: 178px;
+  padding: 9px 12px;
+  box-shadow: none;
+}
+.dividend-heading .dividend-clock strong { font-size: 15px; }
+.dividend-heading .dividend-clock small { white-space: nowrap; }
+.dividend-subtitle { margin: 8px 0 0; color: var(--muted); font-size: 13px; }
+.dividend-subtitle strong { color: var(--ink); }
+.dividend-table { min-width: 960px; }
+.dividend-table th, .dividend-table td { padding: 16px 18px; }
+.dividend-table th { font-size: 13px; color: var(--ink); background: var(--surface); }
+.dividend-table td { font-size: 14px; }
+.dividend-date { color: var(--ink); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.dividend-stock { color: var(--ink); font-weight: 700; }
+.dividend-code { color: var(--muted); font-variant-numeric: tabular-nums; }
+.dividend-cash { color: var(--ink); font-variant-numeric: tabular-nums; }
+.dividend-yield { color: var(--ink); font-variant-numeric: tabular-nums; }
+.dividend-progress { color: var(--ink); white-space: nowrap; }
+.dividend-progress.is-complete { color: var(--green); font-weight: 700; }
+.dividend-progress.is-pending { color: var(--amber); }
+.dividend-scheme { color: var(--ink); white-space: nowrap; }
+.dividend-footer { border-top: 1px solid var(--line); }
+.stock-monitor-clock {
+  min-width: 0;
+}
+.stock-monitor-clock strong { font-size: 15px; }
+.stock-monitor-clock small { white-space: nowrap; }
+.stock-monitor-metrics { grid-template-columns: repeat(7, minmax(0, 1fr)); margin-bottom: 10px; }
+.stock-monitor-panel { overflow: hidden; }
+.stock-monitor-table { min-width: 820px; table-layout: fixed; }
+.stock-monitor-table th,
+.stock-monitor-table td { width: 11.1111%; }
+.stock-monitor-table th:not(:first-child),
+.stock-monitor-table td:not(:first-child) { text-align: right; }
+.stock-monitor-table th,
+.stock-monitor-table td { white-space: nowrap; }
+.stock-monitor-table td,
+.stock-monitor-table td strong,
+.stock-monitor-table td .positive-value,
+.stock-monitor-table td .rsi-overbought { font-weight: 400; }
+.stock-monitor-table td .stock-name { font-weight: 700; }
+.stock-monitor-aonly { min-height: 34px; }
+.monitor-satellite {
+  display: inline-flex;
+  width: 21px;
+  height: 21px;
+  align-items: center;
+  justify-content: center;
+  margin-left: 6px;
+  color: var(--blue);
+  font-size: 17px;
+  line-height: 1;
+  vertical-align: middle;
+}
+.monitor-group-row td {
+  padding: 10px 14px !important;
+  border-top: 1px solid var(--line-strong);
+  background: var(--surface-soft);
+}
+.monitor-group-title {
+  color: var(--ink);
+  font-size: 12px;
+  font-weight: 800;
+}
+.monitor-group-count {
+  margin-left: 8px;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 700;
+}
+.stock-monitor-footer { border-top: 1px solid var(--line); }
+.panel-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 20px; }
+.panel-heading h2 { margin: 0; font-size: 16px; letter-spacing: 0; }
+.panel-count { color: var(--muted); font-size: 12px; padding-top: 4px; }
+.panel-controls { display: flex; gap: 8px; align-items: center; }
+select, .search-box {
+  height: 34px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--ink);
+  outline: none;
+}
+select { padding: 0 28px 0 10px; appearance: auto; }
+select:focus, input:focus { border-color: var(--green); }
+.period-tabs { display: flex; padding: 3px; border-radius: 6px; background: var(--surface-soft); }
+.period-tab { padding: 5px 8px; border: 0; border-radius: 4px; background: transparent; color: var(--muted); font-size: 11px; }
+.period-tab.is-active { background: var(--surface); color: var(--ink); box-shadow: 0 1px 3px rgba(0,0,0,.07); font-weight: 700; }
+.chart-legend { display: flex; align-items: center; gap: 15px; margin-top: 22px; color: var(--muted); font-size: 11px; }
+.legend-line { width: 16px; height: 2px; display: inline-block; vertical-align: middle; margin-right: 5px; }
+.legend-price { background: var(--green); }
+.legend-yield { background: var(--red); }
+.chart-note { margin-left: auto; color: var(--ink); font-weight: 700; }
+.trend-chart-wrap { height: 198px; margin-top: 9px; }
+.trend-chart-wrap svg { width: 100%; height: 100%; overflow: visible; }
+.chart-axis { display: flex; justify-content: space-between; padding: 0 4px; color: var(--muted-2); font-size: 10px; }
+.grid-line { stroke: #edf1ed; stroke-width: 1; }
+.price-area { fill: rgba(39, 115, 83, 0.09); }
+.price-line { fill: none; stroke: var(--green); stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.yield-line { fill: none; stroke: var(--red); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 4 4; }
+.chart-label { fill: var(--muted); font-size: 9px; }
+.chart-dot { fill: var(--surface); stroke: var(--green); stroke-width: 2; }
+
+.sector-chart { margin-top: 19px; display: flex; flex-direction: column; gap: 15px; }
+.sector-row { display: grid; grid-template-columns: 74px 1fr 42px; gap: 10px; align-items: center; font-size: 12px; }
+.sector-name { color: var(--muted); }
+.sector-track { height: 7px; overflow: hidden; border-radius: 3px; background: #edf2ed; }
+.sector-bar { height: 100%; border-radius: inherit; background: var(--green); }
+.sector-row:nth-child(2) .sector-bar { background: #6a9a76; }
+.sector-row:nth-child(3) .sector-bar { background: #b88a47; }
+.sector-row:nth-child(4) .sector-bar { background: #7899a8; }
+.sector-pct { text-align: right; color: var(--ink); font-variant-numeric: tabular-nums; }
+.sector-footer { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 26px; padding-top: 15px; border-top: 1px solid var(--line); font-size: 12px; }
+.sector-footer > div { display: flex; align-items: center; gap: 6px; }
+.sector-total-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); }
+.sector-footer strong { font-weight: 750; }
+.muted { color: var(--muted-2); }
+
+.opportunity-panel { overflow: hidden; }
+.table-heading { padding: 20px 22px 14px; align-items: center; }
+.table-actions { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; justify-content: flex-end; }
+.search-box { width: 190px; display: flex; align-items: center; gap: 7px; padding: 0 10px; color: var(--muted-2); }
+.search-box input { min-width: 0; width: 100%; height: 100%; border: 0; outline: 0; color: var(--ink); background: transparent; font-size: 12px; }
+.search-box input::placeholder { color: var(--muted-2); }
+.switch-control { display: inline-flex; align-items: center; gap: 6px; color: var(--muted); font-size: 11px; cursor: pointer; white-space: nowrap; }
+.switch-control input { position: absolute; opacity: 0; pointer-events: none; }
+.switch { width: 28px; height: 16px; padding: 2px; border-radius: 10px; background: #cfd8d1; transition: background 150ms ease; }
+.switch::after { content: ""; display: block; width: 12px; height: 12px; border-radius: 50%; background: white; transition: transform 150ms ease; box-shadow: 0 1px 2px rgba(0,0,0,.14); }
+.switch-control input:checked + .switch { background: var(--green); }
+.switch-control input:checked + .switch::after { transform: translateX(12px); }
+.table-meta { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 0 22px 11px; color: var(--muted); font-size: 11px; }
+.table-note { color: var(--muted-2); }
+.table-scroll { overflow-x: auto; border-top: 1px solid var(--line); }
+.opportunity-table { width: 100%; min-width: 930px; border-collapse: collapse; }
+#overviewView .opportunity-table { table-layout: fixed; }
+#overviewView .opportunity-table th,
+#overviewView .opportunity-table td { width: 9.0909%; }
+.opportunity-table th, .opportunity-table td { padding: 12px 14px; text-align: left; border-bottom: 1px solid #edf1ed; }
+.opportunity-table th { color: var(--muted); background: var(--surface-soft); font-size: 11px; font-weight: 700; white-space: nowrap; }
+.opportunity-table td { font-size: 12px; font-variant-numeric: tabular-nums; }
+.opportunity-table tbody tr { transition: background 130ms ease; }
+.opportunity-table tbody tr:hover, .opportunity-table tbody tr.is-selected { background: #f5f9f5; }
+.opportunity-table tbody tr { cursor: pointer; }
+.opportunity-table tbody tr.inline-stock-detail { cursor: default; }
+.opportunity-table tbody tr.inline-stock-detail:hover { background: transparent; }
+.opportunity-table tbody tr.inline-crypto-detail { cursor: default; }
+.opportunity-table tbody tr.inline-crypto-detail:hover { background: transparent; }
+.inline-stock-detail td { padding: 14px 18px 18px !important; background: #fbfcfb; }
+.inline-crypto-detail td { padding: 14px 18px 18px !important; background: #fbfcfb; }
+.inline-stock-detail-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(260px, 0.75fr);
+  gap: 14px;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+}
+.inline-stock-detail-heading {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.inline-stock-detail-heading strong { display: block; font-size: 15px; }
+.inline-stock-detail-heading span { display: block; margin-top: 3px; color: var(--muted); font-size: 11px; }
+.inline-period-tabs { display: flex; gap: 4px; padding: 3px; border-radius: 6px; background: var(--surface-soft); }
+.inline-period-tabs button {
+  min-width: 36px;
+  height: 28px;
+  border: 0;
+  border-radius: 5px;
+  background: transparent;
+  color: var(--muted);
+  font-weight: 700;
+}
+.inline-period-tabs button.is-active { background: var(--surface); color: var(--ink); box-shadow: 0 1px 3px rgba(0,0,0,.08); }
+.inline-stock-chart { min-height: 220px; }
+.inline-stock-chart svg { width: 100%; height: 190px; overflow: visible; }
+.inline-stock-analysis {
+  min-height: 220px;
+  padding: 4px 8px 8px;
+  border-left: 1px solid var(--line);
+}
+.inline-analysis-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding-bottom: 9px;
+  border-bottom: 1px solid var(--line);
+}
+.inline-analysis-heading strong { font-size: 14px; }
+.inline-analysis-heading span { color: var(--green); font-size: 11px; font-weight: 700; }
+.inline-analysis-summary {
+  padding: 10px 0 8px;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.6;
+}
+.inline-analysis-list { display: grid; gap: 7px; }
+.inline-analysis-list > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  color: var(--muted);
+  font-size: 11px;
+}
+.inline-analysis-list strong { color: var(--ink); font-size: 12px; }
+.inline-stock-metrics { grid-column: 1 / -1; }
+.inline-chart-legend { display: flex; gap: 18px; margin-bottom: 8px; color: var(--muted); font-size: 11px; }
+.inline-stock-metrics {
+  display: flex;
+  align-content: flex-start;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 8px;
+}
+.inline-stock-metrics span {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  min-height: 32px;
+  padding: 0 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+  font-weight: 750;
+}
+.inline-stock-metrics b { color: var(--muted); font-weight: 700; }
+.sort-button { padding: 0; border: 0; background: transparent; color: inherit; font-size: inherit; font-weight: inherit; }
+.sort-button:hover { color: var(--green); }
+.th-muted { color: var(--muted-2); font-weight: 500; }
+.stock-name { color: var(--ink); font-weight: 700; }
+.stock-code { display: block; margin-top: 2px; color: var(--muted-2); font-size: 10px; }
+.stock-sector { color: var(--muted); font-size: 10px; white-space: nowrap; }
+.price-cell { color: var(--ink); font-weight: 750; }
+.yield-stack { display: grid; gap: 1px; color: var(--ink); font-size: 11px; }
+.yield-stack span:first-child { color: var(--green); font-weight: 700; }
+.yield-stack span:nth-child(2) { color: var(--muted); }
+.yield-stack span:last-child { color: var(--muted-2); }
+.years-cell { font-weight: 700; }
+.drawdown-cell { color: var(--red); }
+.target-cell strong { display: block; color: var(--ink); font-size: 13px; }
+.target-cell span { color: var(--muted-2); font-size: 10px; }
+.target-cell.is-triggered strong { color: var(--red); }
+.table-footer { display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 14px 22px; color: var(--muted); font-size: 11px; }
+.table-footer-note { color: var(--muted-2); }
+.empty-state { padding: 36px 20px !important; text-align: center !important; color: var(--muted); }
+
+.app-footer { max-width: 1440px; margin: 0 auto; padding: 0 32px 22px; display: flex; justify-content: space-between; gap: 18px; color: var(--muted-2); font-size: 10px; }
+.toast {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  padding: 10px 13px;
+  border: 1px solid var(--line-strong);
+  border-radius: 6px;
+  background: var(--ink);
+  color: #fff;
+  font-size: 12px;
+  opacity: 0;
+  transform: translateY(10px);
+  pointer-events: none;
+  transition: opacity 180ms ease, transform 180ms ease;
+  z-index: 20;
+}
+.toast.is-visible { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 1040px) {
+  .topbar { gap: 20px; padding: 0 20px; }
+  .brand-lockup { min-width: auto; }
+  .main-nav { gap: 8px; }
+  .main-content { padding: 16px 20px 20px; }
+  .table-heading { align-items: flex-start; flex-direction: column; }
+  .table-actions { justify-content: flex-start; }
+  .overview-metric-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .account-form { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  #accountView.is-stock-account .account-form { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .account-form-actions { grid-column: 1 / -1; margin-top: 0; }
+  .app-footer { padding: 0 20px 20px; }
+  .account-summary-strip { grid-template-columns: 150px minmax(0, 1fr); }
+  .account-metric-grid .metric-card { padding-left: 12px; padding-right: 12px; }
+  .account-metric-grid .metric-value { font-size: 21px; }
+  .stock-monitor-metrics { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+@media (max-width: 760px) {
+  .topbar { height: auto; min-height: 62px; padding: 10px 16px; flex-wrap: wrap; }
+  .brand-lockup { flex: 1; }
+  .main-nav { order: 3; width: 100%; height: auto; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .main-nav .account-type-tabs { width: auto; }
+  .main-nav .account-type-tab { padding-left: 5px; padding-right: 5px; }
+  .nav-item { height: 44px; }
+  .market-status { display: none; }
+  .main-content { padding: 14px 14px 16px; }
+  .hero-row { align-items: flex-start; flex-direction: column; gap: 16px; }
+  .live-clock { width: 100%; }
+  .crypto-hero-row { align-items: flex-start; flex-direction: column; gap: 16px; }
+  .crypto-market-pill { width: 100%; }
+  .dividend-hero-row { align-items: flex-start; flex-direction: column; gap: 16px; }
+  .dividend-heading .dividend-clock { width: 100%; }
+  .account-form-panel { padding: 17px 16px 18px; }
+  .account-summary-strip { grid-template-columns: 1fr; gap: 8px; }
+  .account-type-tabs { width: 100%; }
+  .account-type-tab { flex: 1; min-width: 0; }
+  .account-sync-card { min-height: 72px; }
+  .account-metric-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  #accountView.is-crypto-account .account-metric-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .account-metric-grid .metric-card { min-height: 94px; padding: 13px; }
+  .account-metric-grid .metric-value { font-size: 23px; }
+  .account-form { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  #accountView.is-stock-account .account-form { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  #accountView.is-fixed-account .account-form { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .account-form-actions { grid-column: 1 / -1; }
+  .metric-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .overview-metric-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .overview-metric-grid .live-clock-card small {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .metric-card { min-height: 116px; padding: 15px; }
+  .inline-stock-detail-inner { grid-template-columns: 1fr; padding: 10px; }
+  .inline-stock-detail-heading { align-items: flex-start; flex-direction: column; }
+  .inline-stock-analysis { min-height: 0; padding: 10px 0 0; border-left: 0; border-top: 1px solid var(--line); }
+  .inline-stock-metrics { padding: 0; gap: 6px; }
+  .inline-stock-metrics span { padding: 0 8px; font-size: 11px; }
+  .metric-value { font-size: 26px; }
+  .dashboard-grid { grid-template-columns: 1fr; }
+  .trend-panel, .sector-panel { padding: 17px 16px 15px; }
+  .analysis-panel { padding: 17px 16px 15px; }
+  .panel-heading { flex-direction: column; gap: 13px; }
+  .panel-controls { width: 100%; }
+  .panel-controls select { flex: 1; min-width: 0; }
+  .chart-note { display: none; }
+  .table-heading { padding: 17px 16px 13px; }
+  .table-actions { width: 100%; }
+  .search-box { flex: 1; width: auto; }
+  .table-meta, .table-footer { padding-left: 16px; padding-right: 16px; }
+  .table-note, .table-footer-note { display: none; }
+  .app-footer { padding: 0 14px 18px; flex-direction: column; gap: 4px; }
+  .stock-monitor-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .stock-monitor-table { min-width: 860px; }
+}
+
+@media (max-width: 430px) {
+  .metric-grid { gap: 8px; }
+  .metric-card { padding: 13px; }
+  .metric-label { font-size: 11px; }
+  .metric-value { margin-top: 9px; font-size: 24px; }
+  .switch-control span:last-child { display: none; }
+}
+
+/* Shared component sizing keeps each view visually aligned. */
+:root {
+  --module-radius: 8px;
+  --module-gap: 12px;
+  --module-card-height: 104px;
+  --control-height: 34px;
+}
+
+.panel,
+.metric-card,
+.live-clock,
+.crypto-market-pill,
+.account-type-tab {
+  border-radius: var(--module-radius);
+}
+
+.metric-grid,
+.overview-metric-grid,
+.crypto-metric-grid,
+.account-metric-grid {
+  gap: var(--module-gap);
+}
+
+.metric-card,
+.account-metric-grid .metric-card,
+#overviewView > .metric-grid .metric-card,
+.account-sync-card,
+.live-clock-card,
+.crypto-status-card {
+  min-height: var(--module-card-height);
+  padding: 14px 16px;
+}
+
+.metric-label {
+  font-size: 12px;
+  line-height: 18px;
+  font-weight: 700;
+}
+
+.metric-value {
+  margin: 8px 0 5px;
+  font-size: 26px;
+  line-height: 32px;
+}
+
+.metric-value small {
+  margin-left: 4px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.metric-meta {
+  font-size: 10px;
+  line-height: 15px;
+}
+
+.account-metric-grid .metric-value,
+#overviewView > .metric-grid .metric-value {
+  margin: 8px 0 5px;
+  font-size: 26px;
+  line-height: 32px;
+}
+
+.account-metric-grid .metric-value small,
+#overviewView > .metric-grid .metric-value small {
+  font-size: 11px;
+}
+
+.account-metric-grid .metric-meta {
+  font-size: 10px;
+  line-height: 15px;
+}
+
+.account-metric-grid #accountProfitMetric,
+.account-metric-grid #accountDividendMetric {
+  background: var(--surface);
+  border-color: var(--line);
+}
+
+.account-metric-grid #accountProfitMetric.account-positive .metric-value,
+.account-metric-grid #accountDividendMetric.account-positive .metric-value,
+.account-metric-grid #accountCostMetric.account-positive .metric-value {
+  color: var(--red);
+}
+
+.account-metric-grid #accountProfitMetric.account-negative .metric-value,
+.account-metric-grid #accountDividendMetric.account-negative .metric-value,
+.account-metric-grid #accountCostMetric.account-negative .metric-value {
+  color: var(--green);
+}
+
+.account-metric-grid #accountProfitMetric .metric-meta,
+.account-metric-grid #accountDividendMetric .metric-meta {
+  color: var(--muted);
+}
+
+.live-clock-card strong,
+.crypto-status-card strong,
+.account-sync-card strong {
+  font-size: 20px;
+  line-height: 28px;
+}
+
+.live-clock-card small,
+.crypto-status-card small {
+  font-size: 11px;
+  line-height: 16px;
+}
+
+.panel-heading h2 {
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.panel-kicker,
+.eyebrow {
+  margin-bottom: 7px;
+  font-size: 11px;
+  line-height: 16px;
+}
+
+.table-heading {
+  padding: 18px 22px 14px;
+}
+
+.table-meta {
+  min-height: 32px;
+  padding-bottom: 10px;
+  font-size: 11px;
+}
+
+.opportunity-table th,
+.opportunity-table td,
+.dividend-table th,
+.dividend-table td {
+  min-height: 44px;
+  padding: 12px 14px;
+}
+
+.opportunity-table th,
+.dividend-table th {
+  font-size: 11px;
+  line-height: 18px;
+}
+
+.opportunity-table td,
+.dividend-table td {
+  font-size: 12px;
+  line-height: 18px;
+}
+
+select,
+.search-box,
+.form-field input,
+.primary-button,
+.secondary-button,
+.compact-button {
+  height: var(--control-height);
+}
+
+.primary-button,
+.secondary-button,
+.compact-button {
+  font-size: 12px;
+  line-height: 18px;
+}
+
+@media (max-width: 760px) {
+  .metric-card,
+  .account-metric-grid .metric-card,
+  #overviewView > .metric-grid .metric-card,
+  .account-sync-card,
+  .live-clock-card,
+  .crypto-status-card {
+    min-height: 96px;
+    padding: 13px;
+  }
+
+  .metric-value {
+    font-size: 24px;
+    line-height: 30px;
+  }
+
+  .account-metric-grid .metric-value,
+  #overviewView > .metric-grid .metric-value {
+    font-size: 24px;
+    line-height: 30px;
+  }
+
+  .table-heading {
+    padding: 16px;
+  }
+
+  .opportunity-table th,
+  .opportunity-table td,
+  .dividend-table th,
+  .dividend-table td {
+    padding: 11px 12px;
+  }
+}
+
+#accountView.is-crypto-account .account-summary-strip {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+#accountView.is-crypto-account .account-summary-strip > .account-metric-grid {
+  display: contents;
+}
+
+@media (max-width: 760px) {
+  #accountView.is-crypto-account .account-summary-strip {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Mobile layout is intentionally stacked so the header and account controls
+   stay readable on narrow screens without widening the whole page. */
+@media (max-width: 760px) {
+  html,
+  body {
+    overflow-x: hidden;
+  }
+
+  .topbar {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 8px;
+    padding: 9px 12px 10px;
+  }
+
+  .brand-lockup {
+    min-height: 32px;
+  }
+
+  .topbar-actions {
+    order: 2;
+    width: 100%;
+    margin-left: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 7px;
+  }
+
+  .topbar-actions .compact-button {
+    width: 100%;
+    min-width: 0;
+    padding: 0 6px;
+    font-size: 11px;
+  }
+
+  .main-nav {
+    order: 3;
+    width: 100%;
+    min-width: 0;
+    gap: 5px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .nav-item,
+  .main-nav .account-type-tab {
+    min-width: 0;
+    height: 43px;
+    padding: 4px 5px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .nav-item {
+    font-size: 12px;
+  }
+
+  .main-nav .account-type-tab span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 11px;
+  }
+
+  .main-nav .account-type-tab small {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 8px;
+  }
+
+  .main-content {
+    width: 100%;
+    min-width: 0;
+    padding: 12px 10px 16px;
+  }
+
+  .panel,
+  .metric-card,
+  .live-clock {
+    min-width: 0;
+  }
+
+  .panel-heading,
+  .table-heading {
+    gap: 9px;
+  }
+
+  .table-heading h2,
+  .panel-heading h2 {
+    font-size: 15px;
+  }
+
+  .table-actions {
+    min-width: 0;
+    gap: 6px;
+  }
+
+  .table-actions > * {
+    max-width: 100%;
+  }
+
+  .search-box {
+    min-width: 0;
+  }
+
+  .account-summary-strip {
+    gap: 7px;
+  }
+
+  .account-sync-card {
+    min-height: 62px;
+  }
+
+  .account-metric-grid {
+    gap: 7px;
+  }
+
+  .account-summary-strip > .account-metric-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  #accountView.is-crypto-account .account-summary-strip > .account-metric-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  #accountView.is-fixed-account .account-summary-strip > .account-metric-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .account-metric-grid .metric-card {
+    min-height: 84px;
+    padding: 11px;
+  }
+
+  .account-metric-grid .metric-value {
+    margin: 4px 0 2px;
+    font-size: 20px;
+    line-height: 26px;
+  }
+
+  .account-metric-grid .metric-meta {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .account-form-panel {
+    padding: 12px;
+  }
+
+  .account-form {
+    gap: 8px;
+    margin-top: 10px;
+  }
+
+  .form-field {
+    grid-template-rows: 15px 32px 13px;
+    gap: 3px;
+  }
+
+  .form-field input {
+    height: 32px;
+    padding: 0 7px;
+    font-size: 12px;
+  }
+
+  .account-form-actions {
+    gap: 6px;
+    height: 51px;
+  }
+
+  .account-holdings-panel .table-heading {
+    padding-bottom: 10px;
+  }
+
+  .account-table,
+  .opportunity-table,
+  .dividend-table {
+    font-size: 11px;
+  }
+
+  .table-scroll {
+    max-width: 100%;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .toast {
+    right: 10px;
+    bottom: 10px;
+    max-width: calc(100vw - 20px);
+  }
+}
+
+@media (max-width: 380px) {
+  .topbar {
+    padding-left: 9px;
+    padding-right: 9px;
+  }
+
+  .main-content {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+  .account-metric-grid .metric-card {
+    padding: 9px;
+  }
+
+  .account-metric-grid .metric-value {
+    font-size: 18px;
+  }
+
+  .account-form {
+    grid-template-columns: 1fr;
+  }
+
+  .account-form-actions {
+    grid-column: 1;
+  }
+}
+:root {
+:root {
