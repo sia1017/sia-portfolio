@@ -123,8 +123,9 @@ let dividendLastRefreshDate = "";
 let dividendUpdatedAt = new Date();
 const isFilePage = window.location.protocol === "file:";
 const isLocalServer = ["localhost", "127.0.0.1", "::1"].includes(window.location.hostname);
-const marketApiBase = isLocalServer ? "/api/market" : "";
-const dividendApiBase = isLocalServer ? "/api" : "";
+const configuredApiBase = String(window.__SIA_API_BASE__ || "").replace(/\/$/, "");
+const marketApiBase = configuredApiBase ? `${configuredApiBase}/api/market` : isLocalServer ? "/api/market" : "";
+const dividendApiBase = configuredApiBase ? `${configuredApiBase}/api` : isLocalServer ? "/api" : "";
 const trendPeriodConfig = {
   "1M": { months: 1, targetPoints: 22, labels: ["1个月前", "3周前", "2周前", "1周前", "现在"] },
   "3M": { months: 3, targetPoints: 44, labels: ["3个月前", "2个月前", "1个月前", "2周前", "现在"] },
